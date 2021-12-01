@@ -55,7 +55,7 @@ class planningWeek(models.Model):
 
     start_date = fields.Date('Début semaine')
     end_date = fields.Date('Fin semaine', compute='_compute_end_date')
-    total_hours = fields.Float('Heures Total', compute='_compute_total_hours')
+    total_hours = fields.Float('Heures Effectuées', compute='_compute_total_hours')
     pending_hours = fields.Float('Heures Restantes', compute='_compute_pending_hours')
     capacity_hours = fields.Float('Capacité (H)')
     occupation = fields.Float('Occupation', compute='_compute_occupation')
