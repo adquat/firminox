@@ -25,14 +25,12 @@
                  decoration-success="occupation &lt; 25"
                  decoration-info="occupation &gt;= 25 and occupation &lt; 75"
                  decoration-warning="occupation &gt;= 75 and occupation &lt; 100"
-                 decoration-danger="occupation &gt;= 100"
-                 sum="Total Heures effectuées" />
+                 decoration-danger="occupation &gt;= 100"/>
           <field name="pending_hours" widget="float_time" readonly="1"
                  decoration-success="occupation &lt; 25"
                  decoration-info="occupation &gt;= 25 and occupation &lt; 75"
                  decoration-warning="occupation &gt;= 75 and occupation &lt; 100"
-                 decoration-danger="occupation &gt;= 100"
-                 sum="Total Heures restantes"/>
+                 decoration-danger="occupation &gt;= 100"/>
           <field name="occupation_prct" widget="percentage" readonly="1"
                  decoration-success="occupation &lt; 25"
                  decoration-info="occupation &gt;= 25 and occupation &lt; 75"
