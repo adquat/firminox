@@ -57,6 +57,7 @@
             <field name="start_date"/>
             <filter string="Date" name="filter_date_from" date="start_date"/>
             <group expand="0" string="Group By">
+                <filter name="group_by_numero" string="Numéro de semaine" context="{'group_by': 'name'}"/>
                 <filter name="group_by_affected_to" string="Affecté à" context="{'group_by': 'affected_to'}"/>
                 <filter name="group_by_start_date" string="Date début" context="{'group_by':'start_date'}"/>
             </group>
