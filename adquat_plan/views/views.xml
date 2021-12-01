@@ -118,50 +118,50 @@
       action="adquat_plan.action_planning_week"/>
 
 
-<!--    <record id="project_task_week_view_form" model="ir.ui.view">-->
-<!--        <field name="name">project.task.view.form.week</field>-->
-<!--        <field name="model">project.task</field>-->
-<!--        <field name="inherit_id" ref="project.view_task_form2"/>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <xpath expr="//field[@name='date_deadline']" position="after">-->
-<!--              <field name="planning_week_id" domain="user_ids and [('affected_to', 'in', user_ids)] or []"-->
-<!--                context="{'show_planned':True}"/>-->
-<!--            </xpath>-->
-<!--        </field>-->
-<!--    </record>-->
+    <record id="project_task_week_view_form" model="ir.ui.view">
+        <field name="name">project.task.view.form.week</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_deadline']" position="after">
+              <field name="planning_week_id" domain="user_ids and [('affected_to', 'in', user_ids)] or []"
+                context="{'show_planned':True}"/>
+            </xpath>
+        </field>
+    </record>
 
 
-<!--    <record id="view_task_kanban_inherited_week" model="ir.ui.view">-->
-<!--        <field name="name">project.task.timesheet.kanban.inherited.week</field>-->
-<!--        <field name="model">project.task</field>-->
-<!--        <field name="inherit_id" ref="project.view_task_kanban"/>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <templates position="before">-->
-<!--                <field name="planning_week_id" />-->
-<!--            </templates>-->
-<!--            <div class="oe_kanban_bottom_left" position="inside">-->
-<!--                <button t-att-class="'btn ' + (record.planning_week_id.value and 'btn-secondary' or 'btn-primary')" name="pick_week" type="object">-->
-<!--                    <span class="fa fa-calendar"/>-->
-<!--                    <span t-esc="record.planning_week_id.value"/>-->
-<!--                </button>-->
-<!--            </div>-->
-<!--         </field>-->
-<!--     </record>-->
+    <record id="view_task_kanban_inherited_week" model="ir.ui.view">
+        <field name="name">project.task.timesheet.kanban.inherited.week</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_kanban"/>
+        <field name="arch" type="xml">
+            <templates position="before">
+                <field name="planning_week_id" />
+            </templates>
+            <div class="oe_kanban_bottom_left" position="inside">
+                <button t-att-class="'btn ' + (record.planning_week_id.value and 'btn-secondary' or 'btn-primary')" name="pick_week" type="object">
+                    <span class="fa fa-calendar"/>
+                    <span t-esc="record.planning_week_id.value"/>
+                </button>
+            </div>
+         </field>
+     </record>
 
 
 <!--    <menuitem name="Tâches" id="adquat_plan.menu_task_full" parent="project.menu_main_pm" sequence="2"-->
 <!--        action="project.action_view_task"/>-->
 
-<!--    <record id="view_task_search_form_inherit_planning_week" model="ir.ui.view">-->
-<!--        <field name="name">project.task.search.inherit.enterprise</field>-->
-<!--        <field name="model">project.task</field>-->
-<!--        <field name="inherit_id" ref="project.view_task_search_form"/>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <xpath expr="//filter[@name='message_needaction']" position="after">-->
-<!--                <field name="planning_week_id"/>-->
-<!--            </xpath>-->
-<!--        </field>-->
-<!--    </record>-->
+    <record id="view_task_search_form_inherit_planning_week" model="ir.ui.view">
+        <field name="name">project.task.search.inherit.enterprise</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_search_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='message_needaction']" position="after">
+                <field name="planning_week_id"/>
+            </xpath>
+        </field>
+    </record>
 
 
       <record id="mrp_workorder_view_form_inherit_workorder_planning" model="ir.ui.view">
