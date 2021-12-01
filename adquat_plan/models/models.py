@@ -114,6 +114,10 @@ class projectTask(models.Model):
         ]
         return action
 
+class projectProject(models.Model):
+    _inherit = 'project.project'
+    date_atelier = fields.Date('Date Atelier')
+
 class mrpWorkorder(models.Model):
     _inherit = 'mrp.workorder'
 

@@ -132,6 +132,18 @@
         </field>
     </record>
 
+   <record id="project_project_view_form_inherit_adquat" model="ir.ui.view">
+        <field name="name">project.form.inherit.adquat</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <div name="dates" position="after">
+                <div name="date_atelier" class="o_row">
+                    <field name="date_atelier"/>
+                </div>
+            </div>
+        </field>
+   </record>
 
     <record id="view_task_kanban_inherited_week" model="ir.ui.view">
         <field name="name">project.task.timesheet.kanban.inherited.week</field>
