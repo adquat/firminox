@@ -69,7 +69,7 @@
                    string="Planning à la semaine"
                    precision="{'week': 'day:half', 'month': 'day:full'}"
                    plan="0"
-                   default_group_by='workcenter_id'
+                   default_group_by='affected_to'
                    default_scale='month'
                    color="color"
                    display_unavailability="0"
