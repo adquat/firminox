@@ -100,7 +100,7 @@
     <record model="ir.actions.act_window" id="adquat_plan.action_planning_week">
       <field name="name">Planning semaine</field>
       <field name="res_model">planning.week</field>
-      <field name="view_mode">tree,form,gantt</field>
+      <field name="view_mode">tree,form</field>
       <field name="context">{'show_gantt':True, 'search_default_group_by_affected_to':1}</field>
     </record>
 
@@ -138,6 +138,7 @@
         <field name="inherit_id" ref="project.edit_project"/>
         <field name="arch" type="xml">
             <div name="dates" position="after">
+                <label for="date_atelier" string="Date Atelier"/>
                 <div name="date_atelier" class="o_row">
                     <field name="date_atelier"/>
                 </div>
