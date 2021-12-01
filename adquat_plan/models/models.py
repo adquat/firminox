@@ -4,6 +4,8 @@ from odoo import models, fields, api, _
 from datetime import timedelta
 from odoo.exceptions import UserError, ValidationError
 import datetime
+from dateutil.relativedelta import relativedelta
+
 from pytz import utc
 
 class planningWeek(models.Model):
@@ -90,6 +92,13 @@ class projectTask(models.Model):
 
     planning_week_id = fields.Many2one('planning.week', string="Planning semaine")
 
+
+    @api.onchange('planning_week_id')
+    def _onchange_planning_week_id(self):
+        if self.planning_week_id and self.planning_week_id.start_date:
+            self.planned_date_begin = self.planning_week_id.start_date
+            self.planned_date_end = self.planning_week_id.start_date + relativedelta(days=4)
+
     def pick_week(self):
         action = self.env["ir.actions.actions"]._for_xml_id("adquat_plan.action_planning_week")
         action['name'] = 'Planifier'
@@ -103,15 +112,13 @@ class projectTask(models.Model):
         action['context']['create'] = False
         # action['context']['actual_user'] = user_id
         #
-        # action['views'] = [
-        #     (self.env.ref('adquat_plan.planning_week_list').id, 'tree'),
-        # ]
+        action['views'] = [(self.env.ref('adquat_plan.planning_week_list').id, 'tree'),]
         action['context']['show_gantt'] = True
         # action['context']['actual_user'] = user_id
 
-        action['views'] = [
-            (self.env.ref('adquat_plan.planning_week_gantt_view').id, 'gantt'),
-        ]
+        # action['views'] = [
+        #     (self.env.ref('adquat_plan.planning_week_gantt_view').id, 'gantt'),
+        # ]
         return action
 
 class projectProject(models.Model):

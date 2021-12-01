@@ -100,7 +100,7 @@
     <record model="ir.actions.act_window" id="adquat_plan.action_planning_week">
       <field name="name">Planning semaine</field>
       <field name="res_model">planning.week</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">tree,form,gantt</field>
       <field name="context">{'show_gantt':True, 'search_default_group_by_affected_to':1}</field>
     </record>
 
