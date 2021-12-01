@@ -1,0 +1,192 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+  <record model="ir.ui.view" id="adquat_plan.planning_week_form">
+      <field name="name">Planning semaine</field>
+      <field name="model">planning.week</field>
+      <field name="arch" type="xml">
+        <form >
+          <button name="pick_this_week" string="Affecter" type="object" icon="fa-check-square-o" />
+        </form>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="adquat_plan.planning_week_list">
+      <field name="name">Planning semaine</field>
+      <field name="model">planning.week</field>
+      <field name="arch" type="xml">
+        <tree editable="top">
+          <field name="name"/>
+<!--          <field name="affected_to" widget="many2one_avatar_user"/>-->
+          <field name="workcenter_id" />
+          <field name="total_hours" widget="float_time" readonly="1"
+                 decoration-success="occupation &lt; 25"
+                 decoration-info="occupation &gt;= 25 and occupation &lt; 75"
+                 decoration-warning="occupation &gt;= 75 and occupation &lt; 100"
+                 decoration-danger="occupation &gt;= 100"/>
+          <field name="occupation_prct" widget="percentage" readonly="1"
+                 decoration-success="occupation &lt; 25"
+                 decoration-info="occupation &gt;= 25 and occupation &lt; 75"
+                 decoration-warning="occupation &gt;= 75 and occupation &lt; 100"
+                 decoration-danger="occupation &gt;= 100"/>
+          <field name="capacity_hours" widget="float_time" />
+          <field name="start_date"/>
+          <field name="occupation" invisible="1"/>
+          <button name="pick_this_week" string="Affecter" type="object" icon="fa-check-square-o" />
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="adquat_plan.planning_week_search">
+      <field name="name">Planning semaine</field>
+      <field name="model">planning.week</field>
+      <field name="arch" type="xml">
+        <search string="Week">
+            <field name="name"/>
+<!--            <field name="affected_to"/>-->
+            <field name="workcenter_id"/>
+            <field name="start_date"/>
+            <filter string="Date" name="filter_date_from" date="start_date"/>
+            <group expand="0" string="Group By">
+                <filter name="group_by_affected_to" string="Affecté à" context="{'group_by': 'workcenter_id'}"/>
+                <filter name="group_by_start_date" string="Date début" context="{'group_by':'start_date'}"/>
+            </group>
+        </search>
+      </field>
+    </record>
+
+<!-- Gantt view -->
+    <record id="planning_week_gantt_view" model="ir.ui.view">
+        <field name="name">planning.week.gantt</field>
+        <field name="model">planning.week</field>
+        <field name="arch" type="xml">
+            <gantt
+                   js_class="planning_gantt"
+                   date_start="start_date"
+                   date_stop="end_date"
+                   string="Planning à la semaine"
+                   precision="{'week': 'day:half', 'month': 'day:full'}"
+                   plan="0"
+                   default_group_by='workcenter_id'
+                   default_scale='month'
+                   color="color"
+                   display_unavailability="0"
+                   form_view_id="%(adquat_plan.planning_week_form)d"
+                   progress="total_hours"
+            >
+                <field name="name"/>
+                <field name="occupation"/>
+                <field name="total_hours"/>
+                <field name="pending_hours"/>
+                <field name="capacity_hours"/>
+                <templates>
+                    <div t-name="gantt-popover">
+                        <div id="allocated_hours"><strong>Capacité : </strong> <t t-esc="capacity_hours"/> H</div>
+                        <div id="allocated_hours"><strong>Charge : </strong> <t t-esc="total_hours"/> H (<t t-esc="occupation"/> %)</div>
+                        <div id="allocated_hours"><strong>Restant : </strong> <t t-esc="pending_hours"/> H</div>
+                    </div>
+                </templates>
+
+            </gantt>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="adquat_plan.action_planning_week">
+      <field name="name">Planning semaine</field>
+      <field name="res_model">planning.week</field>
+      <field name="view_mode">tree,form,gantt</field>
+      <field name="context">{'show_gantt':True}</field>
+    </record>
+
+          <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="adquat_plan.action_planning_week_gantt">
+      <field name="name">Planning semaine</field>
+      <field name="res_model">planning.week</field>
+      <field name="view_mode">gantt</field>
+      <field name="context">{'show_gantt':True}</field>
+    </record>
+
+
+    <menuitem name="Planning semaine" id="adquat_plan.menu_planning_week" parent="mrp.mrp_planning_menu_root" sequence="6"
+      action="adquat_plan.action_planning_week"/>
+
+<!--    <record id="project_task_week_view_form" model="ir.ui.view">-->
+<!--        <field name="name">project.task.view.form.week</field>-->
+<!--        <field name="model">project.task</field>-->
+<!--        <field name="inherit_id" ref="project.view_task_form2"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='date_deadline']" position="after">-->
+<!--              <field name="planning_week_id" domain="user_ids and [('affected_to', 'in', user_ids)] or []"-->
+<!--                context="{'show_planned':True}"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+<!--    <record id="view_task_kanban_inherited_week" model="ir.ui.view">-->
+<!--        <field name="name">project.task.timesheet.kanban.inherited.week</field>-->
+<!--        <field name="model">project.task</field>-->
+<!--        <field name="inherit_id" ref="project.view_task_kanban"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <templates position="before">-->
+<!--                <field name="planning_week_id" />-->
+<!--            </templates>-->
+<!--            <div class="oe_kanban_bottom_left" position="inside">-->
+<!--                <button t-att-class="'btn ' + (record.planning_week_id.value and 'btn-secondary' or 'btn-primary')" name="pick_week" type="object">-->
+<!--                    <span class="fa fa-calendar"/>-->
+<!--                    <span t-esc="record.planning_week_id.value"/>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--         </field>-->
+<!--     </record>-->
+
+
+<!--    <menuitem name="Tâches" id="adquat_plan.menu_task_full" parent="project.menu_main_pm" sequence="2"-->
+<!--        action="project.action_view_task"/>-->
+
+<!--    <record id="view_task_search_form_inherit_planning_week" model="ir.ui.view">-->
+<!--        <field name="name">project.task.search.inherit.enterprise</field>-->
+<!--        <field name="model">project.task</field>-->
+<!--        <field name="inherit_id" ref="project.view_task_search_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//filter[@name='message_needaction']" position="after">-->
+<!--                <field name="planning_week_id"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+      <record id="mrp_workorder_view_form_inherit_workorder_planning" model="ir.ui.view">
+        <field name="name">mrp.workorder.view.form.inherit.workorder.planning</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='qty_producing']" position="after">
+              <field name="planning_week_id" domain="workcenter_id and [('workcenter_id', '=', workcenter_id)] or []"
+                context="{'show_planned':True}"/>
+              <button icon="fa fa-calendar" class="btn-primary"  name="pick_week" type="object"/>
+            </xpath>
+            <xpath expr="//field[@name='duration_expected']" position="attributes">
+                <attribute name="widget">timesheet_uom</attribute>
+            </xpath>
+        </field>
+      </record>
+
+       <record id="mrp_production_workorder_tree_editable_view_inherit_plan_workorder" model="ir.ui.view">
+          <field name="name">mrp.production.work.order.tree.editable.inherit.plan.mrp.workorder</field>
+          <field name="model">mrp.workorder</field>
+          <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='date_planned_start']" position="after">
+                  <field name="planning_week_id" domain="workcenter_id and [('workcenter_id', '=', workcenter_id)] or []"
+                context="{'show_planned':True}"/>
+                  <button icon="fa-calendar" class="btn-primary"  name="pick_week" type="object"/>
+              </xpath>
+          </field>
+      </record>
+  </data>
+</odoo>
