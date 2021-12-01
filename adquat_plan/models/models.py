@@ -47,7 +47,7 @@ class planningWeek(models.Model):
 
     name = fields.Char('Numéro de semaine')
 
-    affected_to = fields.Many2one('res.users')
+    affected_to = fields.Many2one('res.users', 'Affectation')
     task_ids = fields.One2many('project.task', 'planning_week_id')
 
     workcenter_id = fields.Many2one('mrp.workcenter')
