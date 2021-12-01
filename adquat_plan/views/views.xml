@@ -111,7 +111,7 @@
     </record>
 
 
-    <menuitem name="Planning semaine" id="adquat_plan.menu_planning_week" parent="mrp.mrp_planning_menu_root" sequence="6"
+    <menuitem name="Planning semaine" id="adquat_plan.menu_planning_week_mrp" parent="mrp.mrp_planning_menu_root" sequence="6"
       action="adquat_plan.action_planning_week"/>
 
     <menuitem name="Planning semaine" id="adquat_plan.menu_planning_week" parent="project.menu_main_pm" sequence="3"
