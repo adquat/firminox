@@ -19,8 +19,8 @@
       <field name="arch" type="xml">
         <tree editable="top">
           <field name="name"/>
-<!--          <field name="affected_to" widget="many2one_avatar_user"/>-->
-          <field name="workcenter_id" />
+          <field name="affected_to" widget="many2one_avatar_user"/>
+<!--          <field name="workcenter_id" />-->
           <field name="total_hours" widget="float_time" readonly="1"
                  decoration-success="occupation &lt; 25"
                  decoration-info="occupation &gt;= 25 and occupation &lt; 75"
@@ -50,7 +50,7 @@
             <field name="start_date"/>
             <filter string="Date" name="filter_date_from" date="start_date"/>
             <group expand="0" string="Group By">
-                <filter name="group_by_affected_to" string="Affecté à" context="{'group_by': 'workcenter_id'}"/>
+                <filter name="group_by_affected_to" string="Affecté à" context="{'group_by': 'affected_to'}"/>
                 <filter name="group_by_start_date" string="Date début" context="{'group_by':'start_date'}"/>
             </group>
         </search>
