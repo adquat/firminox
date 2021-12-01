@@ -125,6 +125,11 @@ class projectProject(models.Model):
     _inherit = 'project.project'
     date_atelier = fields.Date('Date Atelier')
 
+    @api.onchange('partner_id')
+    def _onchange_partner_id(self):
+        if self.partner_id and self.task_ids:
+            self.task_ids.partner_id = self.partner_id
+
 class mrpWorkorder(models.Model):
     _inherit = 'mrp.workorder'
 
