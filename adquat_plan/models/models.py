@@ -128,7 +128,8 @@ class projectProject(models.Model):
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
         if self.partner_id and self.task_ids:
-            self.task_ids.partner_id = self.partner_id
+            for task in self.task_ids:
+                task.partner_id = self.partner_id
 
 class mrpWorkorder(models.Model):
     _inherit = 'mrp.workorder'
