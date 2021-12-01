@@ -114,6 +114,10 @@
     <menuitem name="Planning semaine" id="adquat_plan.menu_planning_week" parent="mrp.mrp_planning_menu_root" sequence="6"
       action="adquat_plan.action_planning_week"/>
 
+    <menuitem name="Planning semaine" id="adquat_plan.menu_planning_week" parent="project.menu_main_pm" sequence="3"
+      action="adquat_plan.action_planning_week"/>
+
+
 <!--    <record id="project_task_week_view_form" model="ir.ui.view">-->
 <!--        <field name="name">project.task.view.form.week</field>-->
 <!--        <field name="model">project.task</field>-->
