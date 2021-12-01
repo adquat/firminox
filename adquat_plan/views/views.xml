@@ -21,12 +21,12 @@
           <field name="name"/>
           <field name="affected_to" string="Affectation" widget="many2one_avatar_user"/>
 <!--          <field name="workcenter_id" />-->
-          <field name="total_hours" widget="float_time" readonly="1"
+          <field name="total_hours" widget="float_time" readonly="1"/>
+          <field name="pending_hours" widget="float_time" readonly="1"
                  decoration-success="occupation &lt; 25"
                  decoration-info="occupation &gt;= 25 and occupation &lt; 75"
                  decoration-warning="occupation &gt;= 75 and occupation &lt; 100"
                  decoration-danger="occupation &gt;= 100"/>
-          <field name="pending_hours" widget="float_time" readonly="1" />
           <field name="occupation_prct" widget="percentage" readonly="1"
                  decoration-success="occupation &lt; 25"
                  decoration-info="occupation &gt;= 25 and occupation &lt; 75"
