@@ -107,7 +107,7 @@ class projectTask(models.Model):
         user_id = self.user_ids and self.user_ids[0].id or False
         if user_id:
             action['context']['search_default_affected_to'] = user_id
-        action['context']['week_task_id'] = self.id
+        action['context']['week_wo_id'] = self.id
         action['context']['no_create'] = True
         action['context']['create'] = False
         # action['context']['actual_user'] = user_id
